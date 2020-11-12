@@ -17,12 +17,14 @@ fn main() {
 
     //TODO: Panic if not enough arguments are provided
     //Panic should output the string "Not enough arguments"
-
+    if args.len() != 3{
+        panic!("Not enough arguements WE ARE ALL GOING TO DIE! WHAT HAVE YOU DONE YOU BROKE THE PROGRAM!");// a panic that panics
+    }
     //TODO: 
     //  * Pass an argument to read_file to read the original text
     //  * Pass that to disemvowel to remove the vowels
     //  * Write the disemvoweled text using write_file
-
+    
     // Replace String::from("test") with what you get from read_file
     let s = String::from("dummy text");
 
@@ -41,7 +43,7 @@ fn write_file(path: &Path, s: &str) {
 }
 fn is_not_vowel(ch: char)-> bool{
     let vowels = vec!['a','e','i','o','u','A','E','I','O','U'];
-    for character in vowels{
+    for character in 0.. vowels.len(){
         if ch == vowels[character]{
             return false;
         }
@@ -51,7 +53,7 @@ fn is_not_vowel(ch: char)-> bool{
 //TODO: Return the input string without vowels.
 fn disemvowel(s: &str) -> String {
     let mut string_to_return = String::new();
-    for character in s{
+    for character in s.chars(){
         if is_not_vowel(character){
             string_to_return.push(character);
         }
