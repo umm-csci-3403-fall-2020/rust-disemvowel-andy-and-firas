@@ -18,21 +18,26 @@ fn main() {
     //TODO: Panic if not enough arguments are provided
     //Panic should output the string "Not enough arguments"
     if args.len() != 3{
-        panic!("Not enough arguements WE ARE ALL GOING TO DIE! WHAT HAVE YOU DONE YOU BROKE THE PROGRAM!");// a panic that panics
+        panic!("Not enough arguments");
     }
+    // setting the input and output paths to the second and third indexes respectively
+    let input_path = &args[1];
+    let output_path = &args[2];
     //TODO: 
     //  * Pass an argument to read_file to read the original text
     //  * Pass that to disemvowel to remove the vowels
     //  * Write the disemvoweled text using write_file
-    
+    let input_file = Path::new(input_path);
+
+
     // Replace String::from("test") with what you get from read_file
-    let s = String::from("dummy text");
+    let s = read_file(input_file);
 
     let s_disemvowel = disemvowel(&s);
 
     // Use command-line arguments for the name of the file,
     // and s_disemvowel for the text to write out.
-    write_file(Path::new("dummy.txt"), "output string");
+    write_file(Path::new(&output_path), &s_disemvowel);
 }
 
 fn read_file(path: &Path) -> String {
@@ -129,7 +134,7 @@ mod tests {
         use super::*;
         #[test]
         fn requires_two_arguments() {
-            let mut cmd = Command::cargo_bin("rust-disemvowel").unwrap();
+            let mut cmd = Command::cargo_bin("disemvowel-in-rust").unwrap();
             cmd.arg("1");
             cmd.assert()
                 .failure()
@@ -137,7 +142,7 @@ mod tests {
         }
         #[test]
         fn requires_read_file() {
-            let mut cmd = Command::cargo_bin("rust-disemvowel").unwrap();
+            let mut cmd = Command::cargo_bin("disemvowel-in-rust").unwrap();
             cmd.arg("/this/path/does/not/exist")
                 .arg("output/path/doesnt/matter");
             cmd.assert()
