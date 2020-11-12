@@ -39,10 +39,24 @@ fn read_file(path: &Path) -> String {
 fn write_file(path: &Path, s: &str) {
     fs::write(path, s).expect("Unable to write file");
 }
-
+fn is_not_vowel(ch: char)-> bool{
+    let vowels = vec!['a','e','i','o','u','A','E','I','O','U'];
+    for character in vowels{
+        if ch == vowels[character]{
+            return false;
+        }
+    }
+    return true;
+}
 //TODO: Return the input string without vowels.
 fn disemvowel(s: &str) -> String {
-    String::from(s)
+    let mut string_to_return = String::new();
+    for character in s{
+        if is_not_vowel(character){
+            string_to_return.push(character);
+        }
+    }
+    String::from(string_to_return)
 }
 
 // Everything from here down is Rust test code. You shouldn't need to
